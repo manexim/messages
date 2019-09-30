@@ -5,8 +5,8 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Messages</name>
-  <summary></summary>
-  <description></description>
+  <summary>A free messaging app for Facebook Messenger, Slack, Telegram, WhatsApp and many more</summary>
+  <description>A free messaging app for Facebook Messenger, Slack, Telegram, WhatsApp and many more</description>
   <categories>
     <category>Network</category>
   </categories>
@@ -14,7 +14,12 @@
       <binary>com.github.manexim.messages</binary>
   </provides>
   ​<releases></releases>
-  <screenshots></screenshots>
+  <screenshots>
+    <screenshot type="default">
+      <caption></caption>
+      <image>https://raw.githubusercontent.com/manexim/messages/master/data/screenshots/000.png</image>
+    </screenshot>
+  </screenshots>
   <developer_name>Manexim</developer_name>
   <url type="homepage">https://github.com/manexim</url>
   <url type="bugtracker">https://github.com/manexim/messages/issues</url>
