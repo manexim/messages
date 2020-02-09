@@ -15,6 +15,13 @@
   <provides>
       <binary>com.github.manexim.messages</binary>
   </provides>
+  <releases>
+    <release date="2020-02-09" version="0.1.0">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
   ​<releases></releases>
   <screenshots>
     <screenshot type="default">
