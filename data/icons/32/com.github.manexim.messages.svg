@@ -6,10 +6,34 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg6955"
    height="32"
    width="32"
-   version="1.1">
+   version="1.1"
+   sodipodi:docname="com.github.manexim.messages.svg"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1167"
+     id="namedview38"
+     showgrid="false"
+     inkscape:zoom="14.75"
+     inkscape:cx="19.875645"
+     inkscape:cy="25.071032"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3878" />
   <defs
      id="defs6957">
     <linearGradient
@@ -148,7 +172,7 @@
     </rdf:RDF>
   </metadata>
   <path
-     style="fill:url(#radialGradient3872);fill-opacity:1;stroke:#206b00;stroke-width:1;stroke-opacity:0.49803922"
+     style="fill:#4caf50;fill-opacity:1;stroke:#2e7d32;stroke-width:1;stroke-opacity:0.49803922"
      d="m 21.00025,2.5 c 3.601,0 6.5,2.899 6.5,6.5 l 0,2 c 0,3.601 -2.899,6.5 -6.5,6.5 l -13,0 C 7.71067,17.5 7.435858,17.47385 7.1565,17.4375 5.950917,18.995898 3.753989,19.481272 2.00025,18.46875 1.700648,18.295774 1.454989,18.075336 1.219,17.84375 2.098632,17.311485 2.893744,16.583665 3.5315,15.71875 2.284423,14.535821 1.50025,12.862512 1.50025,11 l 0,-2 c 0,-3.601 2.899,-6.5 6.5,-6.5 l 13,0 z"
      id="path3870" />
   <path
@@ -165,7 +189,7 @@
   <path
      id="rect3059"
      d="M 11 13.5 C 7.399 13.5 4.5 16.399 4.5 20 L 4.5 22 C 4.5 25.601 7.399 28.5 11 28.5 L 24 28.5 C 24.28958 28.5 24.564392 28.473852 24.84375 28.4375 C 26.049333 29.995898 28.246261 30.481272 30 29.46875 C 30.299602 29.295774 30.545261 29.075336 30.78125 28.84375 C 29.901618 28.311485 29.106506 27.583665 28.46875 26.71875 C 29.715827 25.535821 30.5 23.862512 30.5 22 L 30.5 20 C 30.5 16.399 27.601 13.5 24 13.5 L 11 13.5 z "
-     style="fill:url(#radialGradient3835);fill-opacity:1;stroke:#002e99;stroke-width:1;stroke-opacity:0.49803922" />
+     style="fill:#4caf50;fill-opacity:1;stroke:#2e7d32;stroke-width:1;stroke-opacity:0.49803922" />
   <g
      id="g3878">
     <path
@@ -173,7 +197,7 @@
        d="m 9,24 0,2 2,0 0,-2 -2,0 z m 3,0 0,2 2,0 0,-2 -2,0 z m 3,0 0,2 2,0 0,-2 -2,0 z"
        style="opacity:0.4;fill:#ffffff;fill-opacity:0.49803922;stroke:none" />
     <path
-       style="fill:#002e99;fill-opacity:0.49803922;stroke:none"
+       style="fill:#2e7d32;fill-opacity:1;stroke:none"
        d="m 9,23 0,2 2,0 0,-2 -2,0 z m 3,0 0,2 2,0 0,-2 -2,0 z m 3,0 0,2 2,0 0,-2 -2,0 z"
        id="rect3956" />
   </g>
