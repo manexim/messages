@@ -32,6 +32,9 @@ public class MainWindow : Gtk.ApplicationWindow {
         headerbar.get_style_context ().add_class ("default-decoration");
         headerbar.show_close_button = true;
 
+        var webview = new Widgets.WebView ("https://web.telegram.org/");
+        add (webview);
+
         set_titlebar (headerbar);
         title = Config.APP_NAME;
 
