@@ -36,10 +36,10 @@ public class Views.MainView : Gtk.Paned {
         list_box.selection_mode = Gtk.SelectionMode.SINGLE;
         list_box.activate_on_single_click = true;
 
-        list_box.insert (new Gtk.ImageMenuItem.with_label ("Messenger"), 0);
-        list_box.insert (new Gtk.ImageMenuItem.with_label ("Slack"), 1);
-        list_box.insert (new Gtk.ImageMenuItem.with_label ("Telegram"), 2);
-        list_box.insert (new Gtk.ImageMenuItem.with_label ("WhatsApp"), 3);
+        list_box.insert (new Gtk.MenuItem.with_label ("Messenger"), 0);
+        list_box.insert (new Gtk.MenuItem.with_label ("Slack"), 1);
+        list_box.insert (new Gtk.MenuItem.with_label ("Telegram"), 2);
+        list_box.insert (new Gtk.MenuItem.with_label ("WhatsApp"), 3);
 
         list_box.row_activated.connect ((row) => {
             stack.set_visible_child_name ("%d".printf (row.get_index ()));
