@@ -20,7 +20,13 @@
 */
 
 public class Widgets.WebView : WebKit.WebView {
-    public WebView (string url) {
+    private string id;
+    private GLib.Icon icon;
+
+    public WebView (string url, string id) {
+        this.id = id;
+        this.icon = Utilities.load_shared_icon (this.id);
+
         var settings = this.get_settings();
         settings.enable_plugins = true;
         settings.enable_javascript = true;
@@ -33,6 +39,15 @@ public class Widgets.WebView : WebKit.WebView {
             var disallowed_origins = new List<WebKit.SecurityOrigin> ();
 
             web_context.init_notification_permissions (allowed_origins, disallowed_origins);
+        });
+
+        show_notification.connect ((notification) => {
+            var native_notification = new GLib.Notification (notification.title);
+            native_notification.set_body (notification.body);
+            native_notification.set_icon (this.icon);
+            Application.instance.send_notification (this.id, native_notification);
+
+            return true;
         });
 
         load_uri (url);

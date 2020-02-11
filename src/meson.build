@@ -1,6 +1,7 @@
 sources = [
     'Config/Constants.vala',
     'Services/Settings.vala',
+    'Utilities/Icon.vala',
     'Views/MainView.vala',
     'Widgets/WebView.vala',
     'MainWindow.vala'
