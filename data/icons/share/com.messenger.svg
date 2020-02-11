@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="com.messenger.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       y2="214.96458"
+       x1="112.42918"
+       x2="112.42918"
+       y1="15.200426"
+       id="a"
+       gradientTransform="scale(0.99618268,1.0038319)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         id="stop10"
+         offset="0"
+         stop-color="#00C6FF" />
+      <stop
+         id="stop12"
+         offset="1"
+         stop-color="#0068FF" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="960"
+     inkscape:window-height="1017"
+     inkscape:window-x="960"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13332)">
+    <g
+       id="g32"
+       transform="matrix(0.1500384,0,0,0.1500384,0.12903253,263.13332)">
+      <path
+         id="path17"
+         d="m 41.255,185.52 v 40.2 L 78.844,204.35 C 89.322,207.37 100.46,209 112,209 173.86,209 224,162.21 224,104.5 224,46.786 173.86,0 112,0 50.144,0 0,46.786 0,104.5 c 0,32.68 16.078,61.86 41.255,81.02 z"
+         inkscape:connector-curvature="0"
+         style="fill:url(#a)" />
+      <path
+         id="path19"
+         d="m 100.04,75.878 -60.401,63.952 54.97,-30.16 28.721,30.16 60.06,-63.952 -54.36,29.632 z"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff" />
+    </g>
+  </g>
+</svg>
