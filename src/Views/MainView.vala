@@ -55,6 +55,27 @@ public class Views.MainView : Gtk.Paned {
                 } else if (messenger.unread_notifications == 0) {
                     unread_notifications.label = "";
                 }
+
+                uint unread_notifications_sum = 0;
+                foreach (var m in messengers) {
+                    unread_notifications_sum += m.unread_notifications;
+                }
+
+                Granite.Services.Application.set_badge.begin (unread_notifications_sum, (obj, res) => {
+                    try {
+                        Granite.Services.Application.set_badge.end (res);
+                    } catch (GLib.Error e) {
+                        critical (e.message);
+                    }
+                });
+
+                Granite.Services.Application.set_badge_visible.begin (unread_notifications_sum != 0U, (obj, res) => {
+                    try {
+                        Granite.Services.Application.set_badge_visible.end (res);
+                    } catch (GLib.Error e) {
+                        critical (e.message);
+                    }
+                });
             });
 
             var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
