@@ -1,10 +1,11 @@
 sources = [
     'Config/Constants.vala',
     'Models/Messenger.vala',
+    'Services/Messengers.vala',
     'Services/Settings.vala',
     'Utilities/Icon.vala',
     'Views/MainView.vala',
-    'Widgets/WebView.vala',
+    'Widgets/MessengerView.vala',
     'MainWindow.vala'
 ]
 

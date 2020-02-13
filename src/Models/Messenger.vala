@@ -19,4 +19,8 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Models.Messenger : Object {}
+public class Models.Messenger : Object {
+    public string id;
+    public string name;
+    public string url;
+}

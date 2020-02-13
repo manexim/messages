@@ -19,13 +19,13 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Widgets.WebView : WebKit.WebView {
-    private string id;
+public class Widgets.MessengerView : WebKit.WebView {
+    private Models.Messenger messenger;
     private GLib.Icon icon;
 
-    public WebView (string url, string id) {
-        this.id = id;
-        this.icon = Utilities.load_shared_icon (this.id);
+    public MessengerView (Models.Messenger messenger) {
+        this.messenger = messenger;
+        this.icon = Utilities.load_shared_icon (this.messenger.id);
 
         var settings = this.get_settings();
         settings.enable_plugins = true;
@@ -35,7 +35,7 @@ public class Widgets.WebView : WebKit.WebView {
 
         web_context.initialize_notification_permissions.connect (() => {
             var allowed_origins = new List<WebKit.SecurityOrigin> ();
-            allowed_origins.append (new WebKit.SecurityOrigin.for_uri (url));
+            allowed_origins.append (new WebKit.SecurityOrigin.for_uri (this.messenger.url));
             var disallowed_origins = new List<WebKit.SecurityOrigin> ();
 
             web_context.init_notification_permissions (allowed_origins, disallowed_origins);
@@ -45,11 +45,11 @@ public class Widgets.WebView : WebKit.WebView {
             var native_notification = new GLib.Notification (notification.title);
             native_notification.set_body (notification.body);
             native_notification.set_icon (this.icon);
-            Application.instance.send_notification (this.id, native_notification);
+            Application.instance.send_notification (this.messenger.id, native_notification);
 
             return true;
         });
 
-        load_uri (url);
+        load_uri (this.messenger.url);
     }
 }

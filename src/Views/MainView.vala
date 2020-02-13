@@ -26,21 +26,22 @@ public class Views.MainView : Gtk.Paned {
         var grid = new Gtk.Grid ();
         var stack = new Gtk.Stack ();
 
-        stack.add_named (new Widgets.WebView ("https://www.messenger.com/", "com.messenger"), "0");
-        stack.add_named (new Widgets.WebView ("https://slack.com/signin/", "com.slack"), "1");
-        stack.add_named (new Widgets.WebView ("https://web.telegram.org/", "org.telegram.web"), "2");
-        stack.add_named (new Widgets.WebView ("https://web.whatsapp.com/", "com.whatsapp.web"), "3");
-
         grid.orientation = Gtk.Orientation.VERTICAL;
         var list_box = new Gtk.ListBox ();
         list_box.selection_mode = Gtk.SelectionMode.SINGLE;
         list_box.activate_on_single_click = true;
 
-        {
+        var messengers = Services.Messengers.get_default ().data;
+        for (var i = 0; i < messengers.length; i++) {
+            var messenger = messengers[i];
+            info (messenger.id);
+
+            stack.add_named (new Widgets.MessengerView (messenger), "%d".printf (i));
+
             var menu_item = new Gtk.MenuItem ();
 
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon ("com.messenger"), Gtk.IconSize.DND);
-            var label = new Gtk.Label ("Messenger");
+            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon (messenger.id), Gtk.IconSize.DND);
+            var label = new Gtk.Label (messenger.name);
 
             var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
             box.pack_start (image, false, false, 0);
@@ -48,52 +49,7 @@ public class Views.MainView : Gtk.Paned {
 
             menu_item.add (box);
 
-            list_box.insert (menu_item, 0);
-        }
-
-        {
-            var menu_item = new Gtk.MenuItem ();
-
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon ("com.slack"), Gtk.IconSize.DND);
-            var label = new Gtk.Label ("Slack");
-
-            var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            box.pack_start (image, false, false, 0);
-            box.pack_start (label, false, false, 0);
-
-            menu_item.add (box);
-
-            list_box.insert (menu_item, 1);
-        }
-
-        {
-            var menu_item = new Gtk.MenuItem ();
-
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon ("org.telegram.web"), Gtk.IconSize.DND);
-            var label = new Gtk.Label ("Telegram");
-
-            var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            box.pack_start (image, false, false, 0);
-            box.pack_start (label, false, false, 0);
-
-            menu_item.add (box);
-
-            list_box.insert (menu_item, 2);
-        }
-
-        {
-            var menu_item = new Gtk.MenuItem ();
-
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon ("com.whatsapp.web"), Gtk.IconSize.DND);
-            var label = new Gtk.Label ("WhatsApp");
-
-            var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            box.pack_start (image, false, false, 0);
-            box.pack_start (label, false, false, 0);
-
-            menu_item.add (box);
-
-            list_box.insert (menu_item, 3);
+            list_box.insert (menu_item, i);
         }
 
         list_box.row_activated.connect ((row) => {
@@ -101,7 +57,6 @@ public class Views.MainView : Gtk.Paned {
         });
 
         var scroll = new Gtk.ScrolledWindow (null, null);
-        scroll.set_size_request (150, 150);
         scroll.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scroll.expand = true;
         scroll.add (list_box);
