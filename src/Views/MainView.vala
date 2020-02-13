@@ -52,6 +52,8 @@ public class Views.MainView : Gtk.Paned {
                 if (stack.get_visible_child () != view) {
                     unread_notifications.label =
                         (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : "";
+                } else if (messenger.unread_notifications == 0) {
+                    unread_notifications.label = "";
                 }
             });
 
@@ -67,6 +69,8 @@ public class Views.MainView : Gtk.Paned {
 
         list_box.row_activated.connect ((row) => {
             stack.set_visible_child_name ("%d".printf (row.get_index ()));
+            var view = stack.get_visible_child ();
+            (view as Widgets.MessengerView).model.unread_notifications = 0;
         });
 
         var scroll = new Gtk.ScrolledWindow (null, null);

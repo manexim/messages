@@ -56,4 +56,10 @@ public class Widgets.MessengerView : WebKit.WebView {
 
         load_uri (this.messenger.url);
     }
+
+    public Models.Messenger model {
+        get {
+            return this.messenger;
+        }
+    }
 }
