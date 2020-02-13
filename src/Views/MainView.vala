@@ -34,18 +34,31 @@ public class Views.MainView : Gtk.Paned {
         var messengers = Services.Messengers.get_default ().data;
         for (var i = 0; i < messengers.length; i++) {
             var messenger = messengers[i];
-            info (messenger.id);
 
-            stack.add_named (new Widgets.MessengerView (messenger), "%d".printf (i));
+            var view = new Widgets.MessengerView (messenger);
+            stack.add_named (view, "%d".printf (i));
 
             var menu_item = new Gtk.MenuItem ();
 
             var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon (messenger.id), Gtk.IconSize.DND);
             var label = new Gtk.Label (messenger.name);
+            var unread_notifications = new Gtk.Label (
+                (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : ""
+            );
+
+            messenger.notify.connect (() => {
+                debug ("[%s] unread_notifications: %u", messenger.id, messenger.unread_notifications);
+
+                if (stack.get_visible_child () != view) {
+                    unread_notifications.label =
+                        (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : "";
+                }
+            });
 
             var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
             box.pack_start (image, false, false, 0);
             box.pack_start (label, false, false, 0);
+            box.pack_end (unread_notifications, false, false, 0);
 
             menu_item.add (box);
 

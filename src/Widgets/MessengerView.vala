@@ -47,6 +47,10 @@ public class Widgets.MessengerView : WebKit.WebView {
             native_notification.set_icon (this.icon);
             Application.instance.send_notification (this.messenger.id, native_notification);
 
+            this.messenger.unread_notifications += 1;
+
+            debug ("[%s] got notification".printf (this.messenger.id));
+
             return true;
         });
 

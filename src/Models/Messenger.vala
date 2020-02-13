@@ -20,7 +20,44 @@
 */
 
 public class Models.Messenger : Object {
-    public string id;
-    public string name;
-    public string url;
+    private string _id;
+    private string _name;
+    private string _url;
+    private uint _unread_notifications = 0;
+
+    public string id {
+        get {
+            return _id;
+        }
+        set {
+            _id = value;
+        }
+    }
+
+    public string name {
+        get {
+            return _name;
+        }
+        set {
+            _name = value;
+        }
+    }
+
+    public string url {
+        get {
+            return _url;
+        }
+        set {
+            _url = value;
+        }
+    }
+
+    public uint unread_notifications {
+        get {
+            return _unread_notifications;
+        }
+        set {
+            _unread_notifications = value;
+        }
+    }
 }
