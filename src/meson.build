@@ -1,5 +1,6 @@
 sources = [
     'Config/Constants.vala',
+    'Models/Messenger.vala',
     'Services/Settings.vala',
     'Utilities/Icon.vala',
     'Views/MainView.vala',
