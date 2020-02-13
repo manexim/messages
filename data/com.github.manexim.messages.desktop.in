@@ -2,7 +2,7 @@
 Type=Application
 Name=Messages
 GenericName=Messages
-Comment=
+Comment=A free messaging app
 Exec=com.github.manexim.messages
 Icon=com.github.manexim.messages
 Categories=GNOME;GTK;Network;
