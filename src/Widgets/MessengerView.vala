@@ -27,7 +27,7 @@ public class Widgets.MessengerView : WebKit.WebView {
         this.messenger = messenger;
         this.icon = Utilities.load_shared_icon (this.messenger.id);
 
-        var settings = this.get_settings();
+        var settings = this.get_settings ();
         settings.enable_plugins = true;
         settings.enable_javascript = true;
         settings.enable_html5_database = true;
