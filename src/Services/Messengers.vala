@@ -19,9 +19,10 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Services.Messengers {
+public class Services.Messengers : Object {
     private static Messengers instance;
     private Models.Messenger[] _data;
+    private string _visible;
 
     public static Messengers get_default () {
         if (instance == null) {
@@ -34,6 +35,20 @@ public class Services.Messengers {
     public Models.Messenger[] data {
         get {
             return _data;
+        }
+    }
+
+    public string visible {
+        get {
+            return _visible;
+        }
+        set {
+            foreach (var m in _data) {
+                if (m.id == value) {
+                    _visible = value;
+                    break;
+                }
+            }
         }
     }
 
