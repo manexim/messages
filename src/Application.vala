@@ -12,6 +12,18 @@ public class Application : Granite.Application {
         }
     }
 
+    construct {
+        var action = new SimpleAction ("show-messenger", VariantType.STRING);
+        action.activate.connect ((parameter) => {
+            this.hold ();
+            string id = parameter.get_string ();
+            Services.Messengers.get_default ().visible = id;
+			this.release ();
+        });
+
+        add_action (action);
+    }
+
     private Application () {
         Object (
             application_id: Config.APP_ID,
