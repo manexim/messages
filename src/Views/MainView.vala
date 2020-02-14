@@ -33,10 +33,10 @@ public class Views.MainView : Gtk.Paned {
 
         var messengers = Services.Messengers.get_default ().data;
         for (var i = 0; i < messengers.length; i++) {
-            var messenger = messengers[i];
+            var messenger = messengers.index (i);
 
             var view = new Widgets.MessengerView (messenger);
-            stack.add_named (view, "%d".printf (i));
+            stack.add_named (view, messenger.id);
 
             var menu_item = new Gtk.MenuItem ();
 
@@ -57,7 +57,7 @@ public class Views.MainView : Gtk.Paned {
                 }
 
                 uint unread_notifications_sum = 0;
-                foreach (var m in messengers) {
+                foreach (var m in messengers.data) {
                     unread_notifications_sum += m.unread_notifications;
                 }
 
@@ -89,7 +89,27 @@ public class Views.MainView : Gtk.Paned {
         }
 
         list_box.row_activated.connect ((row) => {
-            stack.set_visible_child_name ("%d".printf (row.get_index ()));
+            for (var i = 0; i < messengers.length; i++) {
+                if (row.get_index () == i) {
+                    Services.Messengers.get_default ().visible = messengers.index (i).id;
+                    break;
+                }
+            }
+        });
+
+        Services.Messengers.get_default ().notify["visible"].connect (() => {
+            var visible = Services.Messengers.get_default ().visible;
+            int index = 0;
+            for (var i = 0; i < messengers.length; i++) {
+                if (visible == messengers.index (i).id) {
+                    index = i;
+                    break;
+                }
+            }
+
+            list_box.select_row (list_box.get_row_at_index (index));
+
+            stack.set_visible_child_name (visible);
             var view = stack.get_visible_child ();
             (view as Widgets.MessengerView).model.unread_notifications = 0;
         });
