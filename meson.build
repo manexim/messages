@@ -14,5 +14,6 @@ webkit2gtk_4_dep = dependency('webkit2gtk-4.0')
 subdir('data')
 subdir('po')
 subdir('src')
+subdir('plugins')
 
 meson.add_install_script('meson/post_install.py')
