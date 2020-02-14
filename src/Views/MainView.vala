@@ -33,7 +33,7 @@ public class Views.MainView : Gtk.Paned {
 
         var messengers = Services.Messengers.get_default ().data;
         for (var i = 0; i < messengers.length; i++) {
-            var messenger = messengers[i];
+            var messenger = messengers.index (i);
 
             var view = new Widgets.MessengerView (messenger);
             stack.add_named (view, messenger.id);
@@ -57,7 +57,7 @@ public class Views.MainView : Gtk.Paned {
                 }
 
                 uint unread_notifications_sum = 0;
-                foreach (var m in messengers) {
+                foreach (var m in messengers.data) {
                     unread_notifications_sum += m.unread_notifications;
                 }
 
@@ -91,7 +91,7 @@ public class Views.MainView : Gtk.Paned {
         list_box.row_activated.connect ((row) => {
             for (var i = 0; i < messengers.length; i++) {
                 if (row.get_index () == i) {
-                    Services.Messengers.get_default ().visible = messengers[i].id;
+                    Services.Messengers.get_default ().visible = messengers.index (i).id;
                     break;
                 }
             }
@@ -101,7 +101,7 @@ public class Views.MainView : Gtk.Paned {
             var visible = Services.Messengers.get_default ().visible;
             int index = 0;
             for (var i = 0; i < messengers.length; i++) {
-                if (visible == messengers[i].id) {
+                if (visible == messengers.index (i).id) {
                     index = i;
                     break;
                 }
