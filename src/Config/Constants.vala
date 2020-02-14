@@ -23,5 +23,5 @@ namespace Config {
     public const string APP_ID = "com.github.manexim.messages";
     public const string APP_AUTHOR = "Manexim";
     public const string APP_NAME = _("Messages");
-    public const string APP_VERSION = "0.1.0";
+    public const string APP_VERSION = "0.2.0";
 }

@@ -1,3 +1,17 @@
+com.github.manexim.messages (0.2.0) bionic; urgency=medium
+
+[NEW]
+ * Add native notification support
+ * Show number of all unread notifications in the badge icon of the app
+ * Open corresponding tab when clicking a notification
+[IMPROVED]
+[FIXED]
+[TRANSLATIONS]
+ * French (by NathanBnm)
+ * German (by meisenzahl)
+
+ -- Marius Meisenzahl <mariusmeisenzahl@gmail.com>  Fri, 14 Feb 2020 17:49:36 +0100
+
 com.github.manexim.messages (0.1.0) bionic; urgency=medium
 
   * Initial release

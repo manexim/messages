@@ -16,6 +16,28 @@
       <binary>com.github.manexim.messages</binary>
   </provides>
   <releases>
+    <release date="2020-02-14" version="0.2.0">
+      <description>
+        <p>New:</p>
+        <ul>
+         <li>Add native notification support</li>
+         <li>Show number of all unread notifications in the badge icon of the app</li>
+         <li>Open corresponding tab when clicking a notification</li>
+        </ul>
+        <p>Improved:</p>
+        <ul>
+          <li>Show an error page if network is not available</li>
+        </ul>
+        <p>Fixed:</p>
+        <ul>
+        </ul>
+        <p>Translations:</p>
+        <ul>
+          <li>French (by NathanBnm)</li>
+          <li>German (by meisenzahl)</li>
+        </ul>
+      </description>
+    </release>
     <release date="2020-02-09" version="0.1.0">
       <description>
         <p>Initial release</p>
