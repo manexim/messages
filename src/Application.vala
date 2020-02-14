@@ -18,7 +18,7 @@ public class Application : Granite.Application {
             this.hold ();
             string id = parameter.get_string ();
             Services.Messengers.get_default ().visible = id;
-			this.release ();
+            this.release ();
         });
 
         add_action (action);
