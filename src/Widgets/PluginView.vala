@@ -19,13 +19,13 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Widgets.MessengerView : WebKit.WebView {
-    private Models.Messenger messenger;
+public class Widgets.PluginView : WebKit.WebView {
+    private Models.Plugin plugin;
     private GLib.Icon icon;
 
-    public MessengerView (Models.Messenger messenger) {
-        this.messenger = messenger;
-        this.icon = Utilities.load_shared_icon (this.messenger.id);
+    public PluginView (Models.Plugin plugin) {
+        this.plugin = plugin;
+        this.icon = Utilities.load_shared_icon (this.plugin.id);
 
         var settings = this.get_settings ();
         settings.enable_plugins = true;
@@ -35,7 +35,7 @@ public class Widgets.MessengerView : WebKit.WebView {
 
         web_context.initialize_notification_permissions.connect (() => {
             var allowed_origins = new List<WebKit.SecurityOrigin> ();
-            allowed_origins.append (new WebKit.SecurityOrigin.for_uri (this.messenger.url));
+            allowed_origins.append (new WebKit.SecurityOrigin.for_uri (this.plugin.url));
             var disallowed_origins = new List<WebKit.SecurityOrigin> ();
 
             web_context.init_notification_permissions (allowed_origins, disallowed_origins);
@@ -45,23 +45,23 @@ public class Widgets.MessengerView : WebKit.WebView {
             var native_notification = new GLib.Notification (notification.title);
             native_notification.set_body (notification.body);
             native_notification.set_icon (this.icon);
-            Variant target = new Variant.string (this.messenger.id);
-            native_notification.set_default_action_and_target_value ("app.show-messenger", target);
-            Application.instance.send_notification (this.messenger.id, native_notification);
+            Variant target = new Variant.string (this.plugin.id);
+            native_notification.set_default_action_and_target_value ("app.show-tab", target);
+            Application.instance.send_notification (this.plugin.id, native_notification);
 
-            this.messenger.unread_notifications += 1;
+            this.plugin.unread_notifications += 1;
 
-            debug ("[%s] got notification".printf (this.messenger.id));
+            debug ("[%s] got notification".printf (this.plugin.id));
 
             return true;
         });
 
-        load_uri (this.messenger.url);
+        load_uri (this.plugin.url);
     }
 
-    public Models.Messenger model {
+    public Models.Plugin model {
         get {
-            return this.messenger;
+            return this.plugin;
         }
     }
 }

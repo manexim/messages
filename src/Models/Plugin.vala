@@ -19,10 +19,11 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Models.Messenger : Object {
+public class Models.Plugin : Object {
     private string _id;
     private string _name;
     private string _url;
+    private bool _enabled = false;
     private uint _unread_notifications = 0;
 
     public string id {
@@ -49,6 +50,15 @@ public class Models.Messenger : Object {
         }
         set {
             _url = value;
+        }
+    }
+
+    public bool enabled {
+        get {
+            return _enabled;
+        }
+        set {
+            _enabled = value;
         }
     }
 

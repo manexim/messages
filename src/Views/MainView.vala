@@ -31,33 +31,33 @@ public class Views.MainView : Gtk.Paned {
         list_box.selection_mode = Gtk.SelectionMode.SINGLE;
         list_box.activate_on_single_click = true;
 
-        var messengers = Services.Messengers.get_default ().data;
-        for (var i = 0; i < messengers.length; i++) {
-            var messenger = messengers.index (i);
+        var plugins = Services.PluginManager.get_default ().data;
+        for (var i = 0; i < plugins.length; i++) {
+            var plugin = plugins.index (i);
 
-            var view = new Widgets.MessengerView (messenger);
-            stack.add_named (view, messenger.id);
+            var view = new Widgets.PluginView (plugin);
+            stack.add_named (view, plugin.id);
 
             var menu_item = new Gtk.MenuItem ();
 
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon (messenger.id), Gtk.IconSize.DND);
-            var label = new Gtk.Label (messenger.name);
+            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon (plugin.id), Gtk.IconSize.DND);
+            var label = new Gtk.Label (plugin.name);
             var unread_notifications = new Gtk.Label (
-                (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : ""
+                (plugin.unread_notifications > 0) ? "%u".printf (plugin.unread_notifications) : ""
             );
 
-            messenger.notify.connect (() => {
-                debug ("[%s] unread_notifications: %u", messenger.id, messenger.unread_notifications);
+            plugin.notify.connect (() => {
+                debug ("[%s] unread_notifications: %u", plugin.id, plugin.unread_notifications);
 
                 if (stack.get_visible_child () != view) {
                     unread_notifications.label =
-                        (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : "";
-                } else if (messenger.unread_notifications == 0) {
+                        (plugin.unread_notifications > 0) ? "%u".printf (plugin.unread_notifications) : "";
+                } else if (plugin.unread_notifications == 0) {
                     unread_notifications.label = "";
                 }
 
                 uint unread_notifications_sum = 0;
-                foreach (var m in messengers.data) {
+                foreach (var m in plugins.data) {
                     unread_notifications_sum += m.unread_notifications;
                 }
 
@@ -89,19 +89,19 @@ public class Views.MainView : Gtk.Paned {
         }
 
         list_box.row_activated.connect ((row) => {
-            for (var i = 0; i < messengers.length; i++) {
+            for (var i = 0; i < plugins.length; i++) {
                 if (row.get_index () == i) {
-                    Services.Messengers.get_default ().visible = messengers.index (i).id;
+                    Services.PluginManager.get_default ().visible = plugins.index (i).id;
                     break;
                 }
             }
         });
 
-        Services.Messengers.get_default ().notify["visible"].connect (() => {
-            var visible = Services.Messengers.get_default ().visible;
+        Services.PluginManager.get_default ().notify["visible"].connect (() => {
+            var visible = Services.PluginManager.get_default ().visible;
             int index = 0;
-            for (var i = 0; i < messengers.length; i++) {
-                if (visible == messengers.index (i).id) {
+            for (var i = 0; i < plugins.length; i++) {
+                if (visible == plugins.index (i).id) {
                     index = i;
                     break;
                 }
@@ -111,7 +111,7 @@ public class Views.MainView : Gtk.Paned {
 
             stack.set_visible_child_name (visible);
             var view = stack.get_visible_child ();
-            (view as Widgets.MessengerView).model.unread_notifications = 0;
+            (view as Widgets.PluginView).model.unread_notifications = 0;
         });
 
         var scroll = new Gtk.ScrolledWindow (null, null);

@@ -1,11 +1,11 @@
 sources = [
     'Config/Constants.vala',
-    'Models/Messenger.vala',
-    'Services/Messengers.vala',
+    'Models/Plugin.vala',
+    'Services/PluginManager.vala',
     'Services/Settings.vala',
     'Utilities/Icon.vala',
     'Views/MainView.vala',
-    'Widgets/MessengerView.vala',
+    'Widgets/PluginView.vala',
     'MainWindow.vala'
 ]
 

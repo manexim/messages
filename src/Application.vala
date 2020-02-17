@@ -13,11 +13,11 @@ public class Application : Granite.Application {
     }
 
     construct {
-        var action = new SimpleAction ("show-messenger", VariantType.STRING);
+        var action = new SimpleAction ("show-tab", VariantType.STRING);
         action.activate.connect ((parameter) => {
             this.hold ();
             string id = parameter.get_string ();
-            Services.Messengers.get_default ().visible = id;
+            Services.PluginManager.get_default ().visible = id;
             this.release ();
         });
 
