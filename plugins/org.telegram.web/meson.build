@@ -1,6 +1,10 @@
-sources += []
+name = 'org.telegram.web'
+
+sources += [
+    join_paths(meson.source_root(), meson.current_source_dir(), name + '.vala')
+]
 
 install_data(
-    join_paths('org.telegram.web.svg'),
+    name + '.svg',
     install_dir: join_paths(get_option('datadir'), meson.project_name(), 'icons')
 )

@@ -31,7 +31,7 @@ public class Views.MainView : Gtk.Paned {
         list_box.selection_mode = Gtk.SelectionMode.SINGLE;
         list_box.activate_on_single_click = true;
 
-        var plugins = Services.PluginManager.get_default ().data;
+        var plugins = Services.PluginManager.get_default ().enabled;
         for (var i = 0; i < plugins.length; i++) {
             var plugin = plugins.index (i);
 

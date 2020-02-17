@@ -32,9 +32,16 @@ public class Services.PluginManager : Object {
         return instance;
     }
 
-    public Array<Models.Plugin> data {
-        get {
-            return _data;
+    public Array<Models.Plugin> enabled {
+        owned get {
+            var array = new Array<Models.Plugin> ();
+            for (var i = 0; i < _data.length; i++) {
+                if (_data.index (i).enabled) {
+                    array.append_val (_data.index (i));
+                }
+            }
+
+            return array;
         }
     }
 
@@ -56,34 +63,22 @@ public class Services.PluginManager : Object {
         _data = new Array<Models.Plugin> ();
 
         {
-            var plugin = new Models.Plugin ();
-            plugin.id = "com.messenger";
-            plugin.name = "Messenger";
-            plugin.url = "https://www.messenger.com/";
+            var plugin = new ComMessenger ();
             _data.append_val (plugin);
         }
 
         {
-            var plugin = new Models.Plugin ();
-            plugin.id = "com.slack";
-            plugin.name = "Slack";
-            plugin.url = "https://slack.com/signin/";
+            var plugin = new ComSlack ();
             _data.append_val (plugin);
         }
 
         {
-            var plugin = new Models.Plugin ();
-            plugin.id = "org.telegram.web";
-            plugin.name = "Telegram";
-            plugin.url = "https://web.telegram.org/";
+            var plugin = new OrgTelegramWeb ();
             _data.append_val (plugin);
         }
 
         {
-            var plugin = new Models.Plugin ();
-            plugin.id = "com.whatsapp.web";
-            plugin.name = "WhatsApp";
-            plugin.url = "https://web.whatsapp.com/";
+            var plugin = new ComWhatsappWeb ();
             _data.append_val (plugin);
         }
     }

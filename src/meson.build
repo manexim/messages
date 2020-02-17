@@ -1,4 +1,4 @@
-sources = [
+sources += [
     'Config/Constants.vala',
     'Models/Plugin.vala',
     'Services/PluginManager.vala',
@@ -12,10 +12,6 @@ sources = [
 executable(
     meson.project_name(),
     sources + ['Application.vala'],
-    dependencies: [
-        gtk_plus_3_dep,
-        granite_dep,
-        webkit2gtk_4_dep,
-    ],
+    dependencies: dependencies,
     install: true
 )

@@ -23,7 +23,7 @@ public class Models.Plugin : Object {
     private string _id;
     private string _name;
     private string _url;
-    private bool _enabled = false;
+    private bool _enabled = true;
     private uint _unread_notifications = 0;
 
     public string id {
