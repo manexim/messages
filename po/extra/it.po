@@ -1,4 +1,4 @@
-# French translations for extra package.
+# Italian translations for extra package.
 # Copyright (C) 2020 THE extra'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extra package.
 # Mirko Brombin <send@mirko.pm>, 2020.
