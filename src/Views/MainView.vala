@@ -53,6 +53,29 @@ public class Views.MainView : Gtk.Paned {
             });
         }
 
+        Services.PluginManager.get_default ().notify["visible"].connect (() => {
+            var visible = Services.PluginManager.get_default ().visible;
+            Models.Plugin? plugin = null;
+            for (var i = 0; i < plugins.length; i++) {
+                if (visible == plugins.index (i).id) {
+                    plugin = plugins.index (i);
+                    break;
+                }
+            }
+
+            if (plugin == null) {
+                return;
+            };
+
+            foreach (var item in source_list.root.children) {
+                if (item.name == plugin.name) {
+                    source_list.scroll_to_item (item);
+                    source_list.selected = item;
+                    break;
+                }
+            }
+        });
+
         pack1 (source_list, false, false);
         add2 (stack);
 
