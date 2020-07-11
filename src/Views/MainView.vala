@@ -22,107 +22,106 @@
 public class Views.MainView : Gtk.Paned {
     construct {
         orientation = Gtk.Orientation.HORIZONTAL;
+        position = 130;
 
-        var grid = new Gtk.Grid ();
+        var source_list = new Granite.Widgets.SourceList ();
         var stack = new Gtk.Stack ();
 
-        grid.orientation = Gtk.Orientation.VERTICAL;
-        var list_box = new Gtk.ListBox ();
-        list_box.selection_mode = Gtk.SelectionMode.SINGLE;
-        list_box.activate_on_single_click = true;
+        var plugins = Services.PluginManager.get_default ().enabled;
+        for (var i = 0; i < plugins.length; i++) {
+            var plugin = plugins.index (i);
 
-        var messengers = Services.Messengers.get_default ().data;
-        for (var i = 0; i < messengers.length; i++) {
-            var messenger = messengers.index (i);
+            var view = new Widgets.PluginView (plugin);
+            stack.add_named (view, plugin.id);
 
-            var view = new Widgets.MessengerView (messenger);
-            stack.add_named (view, messenger.id);
+            var menu_item = new Granite.Widgets.SourceList.Item (plugin.name);
+            menu_item.badge = (plugin.unread_notifications > 0) ? "%u".printf (plugin.unread_notifications) : "";
+            menu_item.icon = Utilities.load_shared_icon (plugin.id);
+            source_list.root.add (menu_item);
 
-            var menu_item = new Gtk.MenuItem ();
-
-            var image = new Gtk.Image.from_gicon (Utilities.load_shared_icon (messenger.id), Gtk.IconSize.DND);
-            var label = new Gtk.Label (messenger.name);
-            var unread_notifications = new Gtk.Label (
-                (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : ""
-            );
-
-            messenger.notify.connect (() => {
-                debug ("[%s] unread_notifications: %u", messenger.id, messenger.unread_notifications);
+            plugin.notify.connect (() => {
+                debug ("[%s] unread_notifications: %u", plugin.id, plugin.unread_notifications);
 
                 if (stack.get_visible_child () != view) {
-                    unread_notifications.label =
-                        (messenger.unread_notifications > 0) ? "%u".printf (messenger.unread_notifications) : "";
-                } else if (messenger.unread_notifications == 0) {
-                    unread_notifications.label = "";
+                    menu_item.badge =
+                        (plugin.unread_notifications > 0) ? "%u".printf (plugin.unread_notifications) : "";
+                } else if (plugin.unread_notifications == 0) {
+                    menu_item.badge = "";
                 }
 
-                uint unread_notifications_sum = 0;
-                foreach (var m in messengers.data) {
-                    unread_notifications_sum += m.unread_notifications;
-                }
-
-                Granite.Services.Application.set_badge.begin (unread_notifications_sum, (obj, res) => {
-                    try {
-                        Granite.Services.Application.set_badge.end (res);
-                    } catch (GLib.Error e) {
-                        critical (e.message);
-                    }
-                });
-
-                Granite.Services.Application.set_badge_visible.begin (unread_notifications_sum != 0U, (obj, res) => {
-                    try {
-                        Granite.Services.Application.set_badge_visible.end (res);
-                    } catch (GLib.Error e) {
-                        critical (e.message);
-                    }
-                });
+                update_app_badge ();
             });
-
-            var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            box.pack_start (image, false, false, 0);
-            box.pack_start (label, false, false, 0);
-            box.pack_end (unread_notifications, false, false, 0);
-
-            menu_item.add (box);
-
-            list_box.insert (menu_item, i);
         }
 
-        list_box.row_activated.connect ((row) => {
-            for (var i = 0; i < messengers.length; i++) {
-                if (row.get_index () == i) {
-                    Services.Messengers.get_default ().visible = messengers.index (i).id;
+        Services.PluginManager.get_default ().notify["visible"].connect (() => {
+            var visible = Services.PluginManager.get_default ().visible;
+            Models.Plugin? plugin = null;
+            for (var i = 0; i < plugins.length; i++) {
+                if (visible == plugins.index (i).id) {
+                    plugin = plugins.index (i);
+                    break;
+                }
+            }
+
+            if (plugin == null) {
+                return;
+            };
+
+            foreach (var item in source_list.root.children) {
+                if (item.name == plugin.name) {
+                    source_list.scroll_to_item (item);
+                    source_list.selected = item;
                     break;
                 }
             }
         });
 
-        Services.Messengers.get_default ().notify["visible"].connect (() => {
-            var visible = Services.Messengers.get_default ().visible;
-            int index = 0;
-            for (var i = 0; i < messengers.length; i++) {
-                if (visible == messengers.index (i).id) {
-                    index = i;
+        pack1 (source_list, false, false);
+        add2 (stack);
+
+        source_list.item_selected.connect ((item) => {
+            if (item == null) {
+                return;
+            }
+
+            for (var i = 0; i < plugins.length; i++) {
+                var plugin = plugins.index (i);
+                if (item.name == plugin.name) {
+                    stack.set_visible_child_name (plugin.id);
+                    plugin.unread_notifications = 0;
                     break;
                 }
             }
 
-            list_box.select_row (list_box.get_row_at_index (index));
+            if (item.badge != "" && item.badge != null) {
+                item.badge = "";
+            }
 
-            stack.set_visible_child_name (visible);
-            var view = stack.get_visible_child ();
-            (view as Widgets.MessengerView).model.unread_notifications = 0;
+            update_app_badge ();
+        });
+    }
+
+    private void update_app_badge () {
+        uint unread_notifications_sum = 0;
+        var plugins = Services.PluginManager.get_default ().enabled;
+        foreach (var m in plugins.data) {
+            unread_notifications_sum += m.unread_notifications;
+        }
+
+        Granite.Services.Application.set_badge.begin (unread_notifications_sum, (obj, res) => {
+            try {
+                Granite.Services.Application.set_badge.end (res);
+            } catch (GLib.Error e) {
+                critical (e.message);
+            }
         });
 
-        var scroll = new Gtk.ScrolledWindow (null, null);
-        scroll.hscrollbar_policy = Gtk.PolicyType.NEVER;
-        scroll.expand = true;
-        scroll.add (list_box);
-
-        grid.add (scroll);
-
-        pack1 (grid, false, false);
-        pack2 (stack, true, false);
-        show_all ();
+        Granite.Services.Application.set_badge_visible.begin (unread_notifications_sum != 0U, (obj, res) => {
+            try {
+                Granite.Services.Application.set_badge_visible.end (res);
+            } catch (GLib.Error e) {
+                critical (e.message);
+            }
+        });
     }
 }

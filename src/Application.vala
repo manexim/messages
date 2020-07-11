@@ -13,11 +13,11 @@ public class Application : Granite.Application {
     }
 
     construct {
-        var action = new SimpleAction ("show-messenger", VariantType.STRING);
+        var action = new SimpleAction ("show-tab", VariantType.STRING);
         action.activate.connect ((parameter) => {
             this.hold ();
             string id = parameter.get_string ();
-            Services.Messengers.get_default ().visible = id;
+            Services.PluginManager.get_default ().visible = id;
             this.release ();
         });
 
@@ -35,6 +35,14 @@ public class Application : Granite.Application {
         window = new MainWindow (this);
 
         window.show_all ();
+
+        var action_quit = new SimpleAction ("quit", null);
+        add_action (action_quit);
+        set_accels_for_action ("app.quit", {"<Ctrl>Q"});
+
+        action_quit.activate.connect (() => {
+            quit ();
+        });
     }
 
     public static int main (string[] args) {

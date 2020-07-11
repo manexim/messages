@@ -19,22 +19,29 @@
 * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
 */
 
-public class Services.Messengers : Object {
-    private static Messengers instance;
-    private Array<Models.Messenger> _data;
+public class Services.PluginManager : Object {
+    private static PluginManager instance;
+    private Array<Models.Plugin> _data;
     private string _visible;
 
-    public static Messengers get_default () {
+    public static PluginManager get_default () {
         if (instance == null) {
-            instance = new Messengers ();
+            instance = new PluginManager ();
         }
 
         return instance;
     }
 
-    public Array<Models.Messenger> data {
-        get {
-            return _data;
+    public Array<Models.Plugin> enabled {
+        owned get {
+            var array = new Array<Models.Plugin> ();
+            for (var i = 0; i < _data.length; i++) {
+                if (_data.index (i).enabled) {
+                    array.append_val (_data.index (i));
+                }
+            }
+
+            return array;
         }
     }
 
@@ -52,39 +59,27 @@ public class Services.Messengers : Object {
         }
     }
 
-    private Messengers () {
-        _data = new Array<Models.Messenger> ();
+    private PluginManager () {
+        _data = new Array<Models.Plugin> ();
 
         {
-            var messenger = new Models.Messenger ();
-            messenger.id = "com.messenger";
-            messenger.name = "Messenger";
-            messenger.url = "https://www.messenger.com/";
-            _data.append_val (messenger);
+            var plugin = new ComMessenger ();
+            _data.append_val (plugin);
         }
 
         {
-            var messenger = new Models.Messenger ();
-            messenger.id = "com.slack";
-            messenger.name = "Slack";
-            messenger.url = "https://slack.com/signin/";
-            _data.append_val (messenger);
+            var plugin = new ComSlack ();
+            _data.append_val (plugin);
         }
 
         {
-            var messenger = new Models.Messenger ();
-            messenger.id = "org.telegram.web";
-            messenger.name = "Telegram";
-            messenger.url = "https://web.telegram.org/";
-            _data.append_val (messenger);
+            var plugin = new OrgTelegramWeb ();
+            _data.append_val (plugin);
         }
 
         {
-            var messenger = new Models.Messenger ();
-            messenger.id = "com.whatsapp.web";
-            messenger.name = "WhatsApp";
-            messenger.url = "https://web.whatsapp.com/";
-            _data.append_val (messenger);
+            var plugin = new ComWhatsappWeb ();
+            _data.append_val (plugin);
         }
     }
 }
