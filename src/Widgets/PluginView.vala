@@ -62,6 +62,7 @@ public class Widgets.PluginView : WebKit.WebView {
             enable_html5_database = true,
             enable_html5_local_storage = true,
             enable_javascript = true,
+            enable_page_cache = true,
             enable_plugins = true,
             enable_smooth_scrolling = true,
             enable_webgl = true,
