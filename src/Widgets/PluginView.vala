@@ -27,12 +27,6 @@ public class Widgets.PluginView : WebKit.WebView {
         this.plugin = plugin;
         this.icon = Utilities.load_shared_icon (this.plugin.id);
 
-        var settings = this.get_settings ();
-        settings.enable_plugins = true;
-        settings.enable_javascript = true;
-        settings.enable_html5_database = true;
-        settings.enable_html5_local_storage = true;
-
         web_context.initialize_notification_permissions.connect (() => {
             var allowed_origins = new List<WebKit.SecurityOrigin> ();
             allowed_origins.append (new WebKit.SecurityOrigin.for_uri (this.plugin.url));
@@ -59,9 +53,39 @@ public class Widgets.PluginView : WebKit.WebView {
         load_uri (this.plugin.url);
     }
 
+    construct {
+        var webkit_settings = new WebKit.Settings () {
+            default_font_family = Gtk.Settings.get_default ().gtk_font_name,
+            enable_accelerated_2d_canvas = true,
+            enable_back_forward_navigation_gestures = true,
+            enable_dns_prefetching = true,
+            enable_html5_database = true,
+            enable_html5_local_storage = true,
+            enable_javascript = true,
+            enable_plugins = true,
+            enable_smooth_scrolling = true,
+            enable_webgl = true,
+            hardware_acceleration_policy = WebKit.HardwareAccelerationPolicy.ALWAYS
+        };
+
+        settings = webkit_settings;
+        web_context = new WebContext ();
+
+        context_menu.connect (on_context_menu);
+    }
+
     public Models.Plugin model {
         get {
             return this.plugin;
         }
+    }
+
+    private bool on_context_menu (
+        WebKit.ContextMenu context_menu,
+        Gdk.Event event,
+        WebKit.HitTestResult hit_test_result
+    ) {
+        // Disable context menu
+        return true;
     }
 }

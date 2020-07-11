@@ -4,6 +4,7 @@ sources += [
     'Services/PluginManager.vala',
     'Services/Settings.vala',
     'Utilities/Icon.vala',
+    'Utilities/WebContext.vala',
     'Views/MainView.vala',
     'Widgets/PluginView.vala',
     'MainWindow.vala'
