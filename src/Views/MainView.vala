@@ -111,7 +111,7 @@ public class Views.MainView : Gtk.Paned {
 
             stack.set_visible_child_name (visible);
             var view = stack.get_visible_child ();
-            (view as Widgets.MessengerView).model.unread_notifications = 0;
+            ((Widgets.MessengerView) view).model.unread_notifications = 0;
         });
 
         var scroll = new Gtk.ScrolledWindow (null, null);
