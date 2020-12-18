@@ -86,5 +86,13 @@ public class Services.Messengers : Object {
             messenger.url = "https://web.whatsapp.com/";
             _data.append_val (messenger);
         }
+        
+        {
+            var messenger = new Models.Messenger ();
+            messenger.id = "co.tinode.web";
+            messenger.name = "Tinode";
+            messenger.url = "http://web.tinode.co/";
+            _data.append_val (messenger);
+        }
     }
 }
