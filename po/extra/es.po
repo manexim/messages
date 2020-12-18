@@ -1,0 +1,49 @@
+# Spanish translations for extra package.
+# Copyright (C) 2020 THE extra'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# Sodomon <sodomon2@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-13 08:26+0100\n"
+"PO-Revision-Date: 2020-12-18 00:11-0400\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Sodomon <sodomon2@gmail.com>\n"
+"Language-Team: Spanish\n"
+"X-Generator: Poedit 2.3\n"
+
+#: data/com.github.manexim.messages.desktop.in:4
+#: data/com.github.manexim.messages.desktop.in:5
+#: data/com.github.manexim.messages.appdata.xml.in:7
+msgid "Messages"
+msgstr ""
+
+#: data/com.github.manexim.messages.desktop.in:6
+msgid "A free messaging app"
+msgstr "Una aplicación de mensajería gratuita"
+
+#: data/com.github.manexim.messages.desktop.in:8
+msgid "com.github.manexim.messages"
+msgstr "com.github.manexim.messages"
+
+#: data/com.github.manexim.messages.appdata.xml.in:8
+#: data/com.github.manexim.messages.appdata.xml.in:10
+msgid ""
+"A free messaging app for Facebook Messenger, Slack, Telegram, WhatsApp and "
+"many more"
+msgstr ""
+"Una aplicación de mensajería gratuita para Facebook Messenger, Slack, "
+"Telegram, WhatsApp y muchos más"
+
+#: data/com.github.manexim.messages.appdata.xml.in:21
+msgid "Initial release"
+msgstr "Lanzamiento inicial"
+
+#: data/com.github.manexim.messages.appdata.xml.in:32
+msgid "Manexim"
+msgstr "Manexim"
