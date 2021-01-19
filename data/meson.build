@@ -15,7 +15,8 @@ shared_icons = [
     'com.messenger',
     'com.slack',
     'com.whatsapp.web',
-    'org.telegram.web'
+    'org.telegram.web',
+    'co.tinode.web'
 ]
 
 foreach icon : shared_icons
