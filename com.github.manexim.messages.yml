@@ -1,0 +1,21 @@
+app-id: com.github.manexim.messages
+runtime: io.elementary.Platform
+runtime-version: '6'
+sdk: io.elementary.Sdk
+command: com.github.manexim.messages
+finish-args:
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+
+  - '--share=network'
+  - '--device=dri'
+
+  # needed for perfers-color-scheme
+  - '--system-talk-name=org.freedesktop.Accounts'
+modules:
+  - name: messages
+    buildsystem: meson
+    sources:
+      - type: dir
+        path: .

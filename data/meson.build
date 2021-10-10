@@ -24,6 +24,11 @@ foreach icon : shared_icons
         join_paths('icons', 'share', icon + '.svg'),
         install_dir: join_paths(get_option('datadir'), meson.project_name(), 'icons')
     )
+
+    install_data(
+        join_paths('icons', 'share', icon + '.svg'),
+        install_dir: join_paths(get_option('datadir'), 'icons', 'hicolor', 'scalable', 'apps')
+    )
 endforeach
 
 i18n.merge_file(
