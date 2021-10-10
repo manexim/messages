@@ -32,6 +32,7 @@ These dependencies must be present before building:
 -   `valac (>=0.40)`
 -   `libgtk-3-dev`
 -   `libgranite-dev`
+-   `libhandy-1-dev`
 -   `libwebkit2gtk-4.0-dev`
 
 ### Building

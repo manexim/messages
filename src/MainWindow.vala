@@ -1,26 +1,30 @@
 /*
-* Copyright (c) 2019 Manexim (https://github.com/manexim)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 2 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-* Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
-*/
+ * Copyright (c) 2019-2021 Manexim (https://github.com/manexim)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA
+ *
+ * Authored by: Marius Meisenzahl <mariusmeisenzahl@gmail.com>
+ */
 
-public class MainWindow : Gtk.ApplicationWindow {
+public class MainWindow : Hdy.Window {
     private Settings settings;
+
+    construct {
+        Hdy.init ();
+    }
 
     public MainWindow (Gtk.Application application) {
         this.application = application;
@@ -28,15 +32,19 @@ public class MainWindow : Gtk.ApplicationWindow {
         settings = Settings.get_default ();
         load_settings ();
 
-        var headerbar = new Gtk.HeaderBar ();
-        headerbar.get_style_context ().add_class ("default-decoration");
-        headerbar.show_close_button = true;
+        var headerbar = new Hdy.HeaderBar () {
+            decoration_layout = "close:",
+            show_close_button = true,
+            title = Config.APP_NAME
+        };
 
         var main_view = new Views.MainView ();
-        add (main_view);
 
-        set_titlebar (headerbar);
-        title = Config.APP_NAME;
+        var main_layout = new Gtk.Grid ();
+        main_layout.attach (headerbar, 0, 0);
+        main_layout.attach (main_view, 0, 1);
+
+        add (main_layout);
 
         delete_event.connect (() => {
             save_settings ();
@@ -74,5 +82,7 @@ public class MainWindow : Gtk.ApplicationWindow {
             settings.window_width = width;
             settings.window_height = height;
         }
+
+        Services.Messengers.get_default ().save ();
     }
 }
